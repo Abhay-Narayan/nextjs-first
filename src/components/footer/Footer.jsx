@@ -1,9 +1,14 @@
-
+import styles from "./footer.module.css";
 
 const Footer = () => {
   return (
-    <div>Footer</div>
-  )
-}
+    <div className={styles.container}>
+      <div className={styles.logo}>Abhay</div>
+      <div className={styles.text}>
+        Creative thoughts agency © All rights reserved.
+      </div>
+    </div>
+  );
+};
 
-export default Footer
+export default Footer;
