@@ -1,7 +1,13 @@
+import { handlegithublogin } from "@/lib/action";
 
-const LoginPage = () => {
+const LoginPage = async() => {
+  
   return (
-    <div>Loginpage</div>
+    <div>
+      <form action={handlegithublogin}>
+        <button>Login with Github</button>
+      </form>
+    </div>
   )
 }
 

@@ -1,8 +1,18 @@
-
+import { handleRegister } from "@/lib/action"
+import styles from "./register.module.css";
 
 const RegisterPage = () => {
   return (
-    <div>RegisterPage</div>
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
+      <form action={handleRegister}>
+        <input type="text" placeholder="username" name="username" />
+        <input type="email" placeholder="email" name="email"/>
+        <input type="password" placeholder="password" name="password"/>
+        <button>Register</button>
+      </form>
+      </div>
+    </div>
   )
 }
 

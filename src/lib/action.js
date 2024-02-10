@@ -1,7 +1,8 @@
 'use server'
 import { revalidatePath } from "next/cache";
-import { Post } from "./models";
+import { Post, User } from "./models";
 import { connectToDB } from "./utils";
+import { signIn, signOut} from "./auth";
 
 export const addPost=async(formData)=>{
     const {title, desc, slug, userId }= Object.fromEntries(formData);
@@ -33,5 +34,39 @@ export const deletePost=async(formData)=>{
     } catch (error) {
         console.log(error)
         return {error:'something went wrong'}
+    }
+}
+
+export const handlegithublogin=async()=>{
+    'use server'
+     await signIn('github')
+}
+
+export const handleLogOut=async()=>{
+    'use server'
+    await signOut()
+}
+
+export const handleRegister=async(formData)=>{
+    'use server'
+    const {username, email, password, img }= Object.fromEntries(formData);
+    try {
+        connectToDB();
+        const user= await User.findOne({email});
+        if(user){
+            return "User already exists"
+        }
+
+        const newUser= new User({
+            username,
+            email, 
+            password,
+            img
+        });
+        await newUser.save();
+        console.log("saved user to the db");
+    } catch (error) {
+        console.log(error);
+        return {error:"something went wrong"}
     }
 }
